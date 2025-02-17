@@ -1,0 +1,48 @@
+name: Check version
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  check_versions_in_notebooks:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+        day: [1, 2, 3]
+
+    steps:
+    - run: |
+        echo "Testing Day ${{ matrix.day }} Tutorials on python ${{ matrix.python-version }}"
+    - uses: actions/checkout@v4
+    - name: Check versions in notebooks
+      run: |
+        for file in Tutorials/Day_${{ matrix.day }}/*ipynb; do
+            echo "Checking ${file}";
+            if ! ./tests/check_versions.py environment.yml "${file}"; then
+                echo "::error file=${file},title=Error";
+                exit 1;
+            fi
+        done
+
+  check_environment:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - run: |
+        echo "Compare versions in pip requirements file and in conda environment file"
+    - uses: actions/checkout@v4
+    - name: Compare versions in pip requirements file and in conda environment file
+      run: |
+        ./tests/check_environment.py requirements.txt environment.yml

@@ -6,7 +6,7 @@ $ gpg -d solutions.tar.gz.gpg | tar -xvzf -
 ```
 to produce all solutions.
 
-You can add solution in the form of text or mardown file, if they require just a few explanantion sentences or lines of code. Otherwise, feel free to create and upload a Jupyter notebook. Use the same environment of the workshop to create it.
+You can add solution in the form of text or mardown file, if they require just a few explanation sentences or lines of code. Otherwise, feel free to create and upload a Jupyter notebook. Use the same environment of the workshop to create it.
 
 To add a new solution, or edit an existing solution. First, unpack the solutions as above. Then, run
 ```

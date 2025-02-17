@@ -27,4 +27,6 @@ dependencies:
 - wget=1.21.4
 - pesummary=1.2.0
 - gwpopulation=0.10.0
+# Development dependencies
+- codespell=2.3.0
 name: igwn-py39-lw

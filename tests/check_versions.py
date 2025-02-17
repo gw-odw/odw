@@ -1,132 +1,120 @@
+#!/usr/bin/env python
 """
-This script is a bascic linter that checks that:
-  - the requirements in requirements.txt match those in environment.yml
-  - the notebooks don't install anything different from environment.yml
-    or missing in environment.yml
-
+This script is a bascic linter that checks that
+a notebook don't install anything different from environment.yml
 The messages are displayed at the end.
+
 The error code is a combination of the 4 errors:
-  - requirements.txt installs a module that is not in environment.yml
-  - requirements.txt installs a different version than environment.yml
   - a notebook installs a module that is not in environment.yml
   - a notebook installs a different version than environment.yml
 
 TODO:
   - add CLI (for file names, mode of operation, etc.)?
-  - should we split that in 2 seperate scripts
+  - should we split that in 2 separate scripts
     (one for requirements.txt)?
   - extend (or create a new script) to compare environment.yml
     to production environment
 """
-import json
 import sys
+import argparse
 import re
+import json
 import yaml
-from yaml.loader import SafeLoader
-import glob
 
 
 # Error codes and messages
-REQ_MISMATCH_ERR = 1 << 0
-REQ_MISMATCH_MSG = "Version mismatch in requirements.txt for {module}: requirements.txt requires {version}, environment.yml requires {dependencies_mod}"
-
-REQ_INSTALL_ERR = 1 << 1
-REQ_INSTALL_MSG = "Extra installation in requirements.txt: requirements.txt requires {module}=={version}, but it is not in environment.yml"
-
-NB_MISMATCH_ERR = 1 << 2
-NB_MISMATCH_MSG = "Version mismatch in {fname} for {module}: notebook requires {version}, environment.yml requires {dependencies_mod}"
-
-NB_INSTALL_ERR = 1 << 3
+NB_INSTALL_ERR = 1 << 0
 NB_INSTALL_MSG = "Extra installation in {fname}: this notebook requires {module}=={version}, but it is not in environment.yml"
+
+NB_MISMATCH_ERR = 1 << 1
+NB_MISMATCH_MSG = "Version mismatch in {fname} for {module}: notebook requires {version}, environment.yml requires {environment_mod}"
 
 # Let's be optimistic: there is no error (yet)
 errors = []
 error_code = 0
 
-env_file = "../environment.yml"
-requirements_file = "../requirements.txt"
+# CLI
+parser = argparse.ArgumentParser(
+    description='Check that pip requirements file match conda environment file',
+)
+parser.add_argument(
+    'environment',
+    help='conda environment file',
+    type=argparse.FileType('r'),
+)
+parser.add_argument(
+    'notebook',
+    help='the notebook to check',
+    type=argparse.FileType('r'),
+)
+parser.add_argument(
+    '-v', '--verbose',
+    help='verbose',
+    action='store_true',
+)
+args = parser.parse_args()
 
-# Read in the environment yaml file
-with open(env_file) as f:
-    environment = yaml.load(f, Loader=SafeLoader)
-
-# Read in the requirements file
-requirements = {}
-with open(requirements_file) as f:
-    for line in f:
-        module, version = line.split("==")
-        requirements[module] = version.rstrip("\n")
-
+# Read the conda environment file
+environment_yaml = yaml.load(args.environment, Loader=yaml.loader.SafeLoader)
+args.environment.close()
 
 # Extract the dependencies and versions
-dependencies = {}
-for element in environment["dependencies"]:
+environment = {}
+for element in environment_yaml["dependencies"]:
     module, version = element.split("=")
-    dependencies[module] = version
+    environment[module] = version
 
+# Read the notebook
+content = json.load(args.notebook)
+fname = args.notebook.name
+args.notebook.close()
 
-# Check requirements and dependencies match
-# Note requirements.txt is a subset of the full environment.yml
-print("Comparing versions in environment.yml and requirements.txt")
-for module, version in requirements.items():
-    print(f"\tChecking {module}")
-    if module in dependencies:
-        if version != dependencies[module]:
-            # Add message and position error code
-            msg = REQ_MISMATCH_MSG.format(
-                module=module,
-                version=version,
-                dependencies_mod=dependencies[module],
-            )
-            errors.append(msg)
-            error_code |= REQ_MISMATCH_ERR
-    else:
-        # Add message and position error code
-        msg = REQ_INSTALL_MSG.format(
-            module=module,
-            version=version,
-        )
-        errors.append(msg)
-        error_code |= REQ_INSTALL_ERR
-
-
-print("Checking content of notebooks")
-files = glob.glob("../Tutorials/Day_*/*ipynb") + glob.glob("../Tutorials/Extension_topics/*ipynb")
-for fname in files:
-    print(f"\tChecking {fname}")
-    with open(fname, "r") as file:
-        content = json.load(file)
-
-    for cell in content["cells"]:
-        code = "\n".join(cell["source"])
-        if "pip install " in code:
-            pip_installs = re.findall("([a-z]+==[0-9\.]+)", code, flags=re.IGNORECASE) 
-            print()
-            for element in pip_installs:
-                module, version = element.split("==")
-                module = module.lower()
-                if module in dependencies:
-                    if dependencies[module] != version:
-                        # Add message and position error code
-                        msg = NB_MISMATCH_MSG.format(
-                            fname=fname,
-                            module=module,
-                            version=version,
-                            dependencies_mod=dependencies[module],
-                        )
-                        errors.append(msg)
-                        error_code |= NB_MISMATCH_ERR
-                else:
+if args.verbose:
+    print("Checking content of notebooks")
+for cell in content["cells"]:
+    code = "\n".join(cell["source"])
+    if "pip install " in code:
+        if args.verbose:
+            print(f"Checking cell {cell['execution_count']}")
+        pip_installs = re.findall("([a-z]+==[0-9.]+)", code, flags=re.IGNORECASE)
+        if args.verbose:
+            print(f"Cell {cell['execution_count']} installs {pip_installs}")
+        for element in pip_installs:
+            module, version = element.split("==")
+            if args.verbose:
+                print(f"\tChecking {module}")
+            module = module.lower()
+            if module in environment:
+                if args.verbose:
+                    print(f"\t\tModule found")
+                if environment[module] != version:
+                    if args.verbose:
+                        print(f"\t\tVersion mismatch")
                     # Add message and position error code
-                    msg = NB_INSTALL_MSG.format(
+                    msg = NB_MISMATCH_MSG.format(
                         fname=fname,
                         module=module,
                         version=version,
+                        environment_mod=environment[module],
                     )
                     errors.append(msg)
-                    error_code |= NB_INSTALL_ERR
+                    error_code |= NB_MISMATCH_ERR
+                else:
+                    if args.verbose:
+                        print(f"\t\tVersion match ({version})")
+            else:
+                if args.verbose:
+                    print(f"\t\tModule not found in conda environment")
+                # Add message and position error code
+                msg = NB_INSTALL_MSG.format(
+                    fname=fname,
+                    module=module,
+                    version=version,
+                )
+                errors.append(msg)
+                error_code |= NB_INSTALL_ERR
 
 if errors:
-    print("Error(s) found:")
-    print("\n".join(errors))
+    print("Error(s) found:", file=sys.stderr)
+    print("\n".join(errors), file=sys.stderr)
     sys.exit(error_code)

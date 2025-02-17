@@ -1,0 +1,64 @@
+name: Check spelling
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  spellcheck:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        python-version: [3.9]
+        day: [1, 2, 3]
+
+    steps:
+    - run: |
+        echo "Spellchecking Day ${{ matrix.day }} Tutorials on python ${{ matrix.python-version }}"
+    - uses: actions/checkout@v4
+    - uses: conda-incubator/setup-miniconda@v3
+    - name: Installing requirements
+      run: |
+        conda env create -f environment.yml
+    - name: Spellchecking notebooks
+      run: |
+        conda activate igwn-py39-lw
+        for file in Tutorials/Day_${{ matrix.day }}/*ipynb; do
+            echo "Checking ${file}";
+            if ! ./tests/check_spelling.sh "${file}"; then
+                echo "::error file=${file},title=Error";
+                exit 1;
+            fi
+        done
+
+  spellcheck_other_files:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - run: |
+        echo "Spellchecking other files python ${{ matrix.python-version }}"
+    - uses: actions/checkout@v4
+    - uses: conda-incubator/setup-miniconda@v3
+    - name: Installing requirements
+      run: |
+        conda env create -f environment.yml
+    - name: Spellchecking other files
+      run: |
+        conda activate igwn-py39-lw
+        codespell -I .dictionary.txt --skip="*.ipynb" .
