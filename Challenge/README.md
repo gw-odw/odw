@@ -1,8 +1,6 @@
 # Data Challenge 
 
-### GW Open Data Workshop #7
-
-Challenge activity for the Open Data Workshop 2024: https://gwosc.org/odw/odw2024/
+Challenge activity for the Open Data Workshop course:
 
 Data files may be downloaded from [DCC G2300818](https://dcc.ligo.org/LIGO-G2300818/public) using these links:
 
@@ -23,10 +21,10 @@ Good luck to all!
 
 Identify a loud binary black hole signal in white, Gaussian noise.
 
-* Use the data file "challenge1.gwf".  The channel name is "H1:CHALLENGE1".
+* Use the data file `challenge1.gwf`.  The channel name is `H1:CHALLENGE1`.
 * The data are white, Gaussian noise containing a simulated BBH signal.
 
-1. Load the data into memory.  What are the sampling rate and duration of the data?
+1. Load the data into memory. What are the sampling rate and duration of the data?
 
 2. Plot the data in the time-domain. 
 
@@ -39,12 +37,12 @@ Identify a loud binary black hole signal in white, Gaussian noise.
 
 Signal in colored, Gaussian noise.
 
-* Use the data file "challenge2.gwf", with channel name "H1:CHALLENGE2"
-* The data contain a BBH signal with m1=m2=30 solar masses, spin = 0.
+* Use the data file `challenge2.gwf`, with channel name `H1:CHALLENGE2`
+* The data contain a BBH signal with `m1=m2=30` solar masses, `spin=0`.
 
 1. What is the approximative time of the merger? (Hint: a plot of the q-transform could help)
 
-2. Generate a time-domain template waveform using approximate "SEOBNRv4_opt".
+2. Generate a time-domain template waveform using approximate `SEOBNRv4_opt`.
    with the same parameters as above.  Plot this waveform.
 
 3. Calculate a PSD of the data, and plot this on a log-log scale.
@@ -57,10 +55,10 @@ Signal in colored, Gaussian noise.
 
 ### Challenge 3 (4 points) -- Intermediate
 
-* Use the data file "challenge3.gwf" with channel "H1:CHALLENGE3"
+* Use the data file `challenge3.gwf` with channel `H1:CHALLENGE3`
 * These are real LIGO data from O2, though we've adjusted the time labels and 
   added some simulated signals.
-* The data contain a loud simulated signal with m1 = m2 = 10 solar masses.
+* The data contain a loud simulated signal with `m1=m2=10` solar masses.
 
 1. What is the merger time of this signal?
 
@@ -69,21 +67,21 @@ Signal in colored, Gaussian noise.
 
 ### Challenge 4 (8 points) -- Advanced
 
-* Use the data file "challenge3.gwf" with channels "H1:CHALLENGE3" and "L1:CHALLENGE3".
+* Use the data file `challenge3.gwf` with channels `H1:CHALLENGE3` and `L1:CHALLENGE3`.
 * These are real LIGO data from O2, though we've adjusted the time labels and 
   added some simulated signals.
 * Any simulated signals have been added to both the H1 and L1 data
-* All simulated signals have 0 spin and m1=m2, with m1 somewhere in the range 10-50 solar masses
+* All simulated signals have `spin=0` and `m1=m2`, with `m1` somewhere in the range 10-50 solar masses
 
 1. Identify as many signals as you can.  Watch out!  These are real data, and so glitches may be
 present.  Any correct detection is +1 point but any false alarms will count -1 point 
-against your score.  For each signal you find, list:
+against your score. For each signal you find, list:
 
  * The merger time
  * The SNR
  * Your estimate of the component masses
 
-2. Identify as many glitches as you can.  Make a spectrogram of each one.
+2. Identify as many glitches as you can. Make a spectrogram of each one.
 
 3. For each simulated BBH you found, use bilby to compute a posterior
    distribution for the mass. You can fix the spin and mass ratio to make
@@ -106,6 +104,7 @@ for ifo_name in ['H1','L1']:
 ```
 
 To load data in google co-lab.  Run this code, and then 'restart runtime', and run it again
+
 ```
 ! pip install -q lalsuite
 ! pip install -q gwpy
