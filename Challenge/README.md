@@ -1,8 +1,8 @@
 # Data Challenge 
 
-### GW Open Data Workshop #7
+### GW Open Data Workshop
 
-Challenge activity for the Open Data Workshop 2024: https://gwosc.org/odw/odw2024/
+Challenge activity for the Open Data Workshop course.
 
 Data files may be downloaded from [DCC G2300818](https://dcc.ligo.org/LIGO-G2300818/public) using these links:
 
@@ -11,7 +11,8 @@ Data files may be downloaded from [DCC G2300818](https://dcc.ligo.org/LIGO-G2300
 * [challenge3.gwf](https://dcc.ligo.org/public/0187/G2300818/001/challenge3.gwf)
 * [challenge3_2048hz.gwf](https://dcc.ligo.org/public/0187/G2300818/001/challenge3_2048hz.gwf)   <-- Downsampled version of Challenge 3 file
 
-Workshop participants may [submit solutions via thinkific](https://gw-odw.thinkific.com) as individuals or in teams of up to 3 people.  Solutions are due before 23:00 UTC of Apr 30, 2024. 
+Workshop participants may [submit solutions via thinkific](https://gw-odw.thinkific.com) as individuals or in teams of up to 3 people.
+Check for the deadline date on the Thinkific website.
 
 Challenges are ordered by difficulty. Entries will be rewarded a number of
 points that scales with the difficulty of the challenge. 

@@ -1,6 +1,9 @@
 # ODW solution repo
 
-This repository contains the encrypted solutions to the quizzes and challenges proposed at the [ODW7, 2024](https://github.com/gw-odw/odw-2024). To see the solutions, you need to be in possession of the secret key. Once you have this, you can run
+This directory contains encrypted solutions to the quizzes and challenges on this repo.
+To be able to see the solutions, you need a secret key.
+With it, run the following command to produce all solutions.
+
 ```
 $ gpg -d solutions.tar.gz.gpg | tar -xvzf -
 ```
