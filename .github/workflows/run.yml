@@ -21,6 +21,7 @@ jobs:
       matrix:
         python-version: [3.11]
         day: [1, 2, 3]
+      fail-fast: false
 
     steps:
     - run: |
