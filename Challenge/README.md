@@ -24,7 +24,7 @@ Identify a loud binary black hole signal in white, Gaussian noise.
 * Use the data file `challenge1.gwf`. The channel name is `H1:CHALLENGE1`.
 * The data are white, Gaussian noise containing a simulated BBH signal.
 
-Preliminary steps:
+Instructions:
 1. Load the data into memory. What are the sampling rate and duration of the data?
 2. Plot the data in the time-domain.
 3. Plot a spectrogram (or q-transform) of the data, and try to identify the signal.
@@ -40,6 +40,7 @@ Signal in colored, Gaussian noise.
 * The data contain a BBH signal with m1 = m2 = 30 solar masses, spin = 0.
 
 Question A:
+
 * What is the approximative time of the merger? (Hint: a plot of the q-transform could help)
 
 Next steps:
@@ -50,6 +51,7 @@ Next steps:
 3. Use the template waveform and PSD to calculate the SNR time series. Plot the SNR time-series.
 
 Question B:
+
 * What is the matched filter SNR of the signal?
 
 
