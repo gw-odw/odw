@@ -63,7 +63,9 @@ Question B:
 * The data contain a loud simulated signal with m1 = m2 = 10 solar masses.
 
 Questions:
+
 A. What is the merger time of this signal?
+
 B. What is the matched-filter SNR of this signal?
 
 **Note:** it's not needed to use bilby for this challenge.
