@@ -14,6 +14,8 @@ Workshop participants may [submit solutions via the online course](https://learn
 Challenges are ordered by difficulty. Entries will be rewarded a number of
 points that scales with the difficulty of the challenge.
 
+**Warning**: you can submit solutions only once so we recommend answering all the questions in a Challenge before submitting.
+
 Good luck to all!
 
 ## Challenge 1 (1 point) -- Novice
