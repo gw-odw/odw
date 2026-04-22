@@ -31,7 +31,7 @@ Instructions:
 
 Question for Challenge 1:
 
-1. What is the time of the merger (in seconds from the start of the segment)?
+* A. What is the time of the merger (in seconds from the start of the segment)?
 
 ## Challenge 2 (2 points) -- Rookie
 
@@ -51,8 +51,8 @@ Instructions:
 
 Questions for Challenge 2:
 
-2. From the Q-transform, what is the approximative time of the merger?
-3. What is the matched filter SNR of the signal?
+* A. From the Q-transform, what is the approximative time of the merger?
+* B. What is the matched filter SNR of the signal?
 
 ## Challenge 3 (4 points) -- Intermediate
 
@@ -69,8 +69,8 @@ Instructions:
 
 Questions for challenge 3:
 
-4. What is the merger time of the loud signal?
-5. What is the matched-filter SNR of the loud signal?
+* A. What is the merger time of the loud signal?
+* B. What is the matched-filter SNR of the loud signal?
 
 **Note:** it's not needed to use bilby for this challenge.
 
@@ -85,21 +85,21 @@ Realistic search and parameter estimation:
 * All simulated signals have spin = 0 and m1 = m2, with m1 somewhere in the range 10-50 solar masses.
 * Watch out! These are real data, and so glitches may be present.
 
-Questions:
+Questions for Challenge 4:
 
-6. Identify as many signals as you can. Any correct detection is +1 point but any false alarms will count -1 point
+* A. Identify as many signals as you can. Any correct detection is +1 point but any false alarms will count -1 point
 against your score. For each signal you find, list:
 
- * The merger time
- * The SNR
- * Your estimate of the component masses
+   * The merger time
+   * The SNR
+   * Your estimate of the component masses
 
-7. Identify as many glitches as you can. Make a spectrogram of each one.
-8. For the earliest event you found, use bilby to compute the posterior distribution for the mass.
-   Hint:
+* B. Identify as many glitches as you can. Make a spectrogram of each one.
+* C. For the earliest event you found, use bilby to compute the posterior distribution for the mass.
+     Hint:
 
-   - Fix the spin and mass ratio to make this run faster.
-   - You can also fix other angular parameters to zero, while leaving at least the chirp mass, sky position, time and distance free. This will still give an approximately correct posterior for the chirp mass.
+     - Fix the spin and mass ratio to make this run faster.
+     - You can also fix other angular parameters to zero, while leaving at least the chirp mass, sky position, time and distance free. This will still give an approximately correct posterior for the chirp mass.
 
 ### Useful notes
 
