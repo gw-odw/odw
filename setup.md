@@ -138,6 +138,6 @@ Note: this repository contains a `pyproject.toml` file, and should thus be compa
 
 🟠 Advanced (For Windows 10 or 11)
 
-If you are using Windows and would like to run the notebooks directly, install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). There are additional instructions [here](https://ask.igwn.org/t/run-the-workshops-under-windows-with-wsl/84) for getting started with the notebooks.
+If you are using Windows and would like to run the notebooks directly, install [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). Please ensure that your local directory has the necessary write permissions to allow for data downloading and to avoid potential access errors. There are additional instructions [here](https://ask.igwn.org/t/run-the-workshops-under-windows-with-wsl/84) for getting started with the notebooks. 
 Note that even if Conda works many packages needed for the Tutorials are not running on Windows at all, so we suggest to follow one of the previous options and not to run the Tutorials directly on Windows.
 Please indicate to us any problem or misunderstanding that you meet when following these steps. You can make comment directly on [ask.igwn.org](https://ask.igwn.org/)
