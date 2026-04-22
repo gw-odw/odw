@@ -96,8 +96,10 @@ against your score. For each signal you find, list:
    * The SNR
    * Your estimate of the component masses
 
-* B. Identify as many glitches as you can. Make a spectrogram of each one.
+* B. Identify as many glitches as you can. Make a spectrogram of each one. List the times of any glitches you find.
 * C. For the earliest event you found, use bilby to compute the posterior distribution for the mass.
+     List the 90% confidence interval for the component mass.
+
      Hint:
 
      - Fix the spin and mass ratio to make this run faster.
