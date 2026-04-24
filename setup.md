@@ -70,21 +70,21 @@ This guide will walk you through the configuration of this environment (named `o
 
    `conda config --add channels conda-forge`
 
-3. Create the environment.
-
-   `conda env create --file environment.yml`
-
-4. Activate the environment.
-
-   `conda activate odw-py312`
-
-5. Clone the workshop git repo
+3. Clone the workshop git repo
 
    `git clone https://github.com/gw-odw/odw.git`
 
-6. Move into the directory with the workshop git repo
+4. Move into the directory with the workshop git repo
 
    `cd odw`
+
+5. Create the environment.
+
+   `conda env create --file environment.yml`
+
+6. Activate the environment.
+
+   `conda activate odw-py312`
 
 7. Build a custom [jupyter kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) using the command
 
