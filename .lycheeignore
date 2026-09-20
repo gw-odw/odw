@@ -20,6 +20,9 @@ https://medium.com/hackernoon/improve-your-python-python-classes-and-object-orie
 # We believe it's because Thinkific (which eventually answers) blocks GitHub IPs
 https://learn.gwosc.org
 
+# ADS now has a captcha
+https://ui.adsabs.harvard.edu/abs/2019PhRvD.100j4004C/abstract
+
 # PyCBC documentation is not versionned so some links go out of date
 # but we can't always use the latest version so we ignore them.
 # Remove once https://github.com/gwastro/pycbc/pull/4778 is merged
