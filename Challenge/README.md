@@ -27,7 +27,7 @@ Identify a loud binary black hole signal in white, Gaussian noise:
 
 Instructions:
 
-* Load the data into memory. What are the sampling rate and duration of the data?
+* Load the data into memory.
 * Plot the data in the time-domain.
 * Plot a spectrogram (or Q-transform) of the data, and try to identify the signal.
 
